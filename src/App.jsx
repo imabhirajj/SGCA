@@ -55,15 +55,19 @@ function HowWeWork() {
           <div className="work-hero-phones">
             <img
               className="work-phone work-phone-left"
-              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=520&h=1040&fit=crop"
-              alt="Phone mockup left"
+              src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=520&h=1040&fit=crop&auto=format&q=80"
+              alt="Mobile app interface showing user dashboard"
               loading="lazy"
+              width="260"
+              height="520"
             />
             <img
               className="work-phone work-phone-right"
-              src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=520&h=1040&fit=crop"
-              alt="Phone mockup right"
+              src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=520&h=1040&fit=crop&auto=format&q=80"
+              alt="Mobile app interface showing analytics"
               loading="lazy"
+              width="260"
+              height="520"
             />
           </div>
           <div className="work-hero-curve" aria-hidden>
@@ -126,9 +130,11 @@ function HowWeWork() {
           </div>
           <img
             className="work-stat-phone"
-            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&h=400&fit=crop"
-            alt="Phone UI"
+            src="https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?w=200&h=400&fit=crop&auto=format&q=80"
+            alt="Mobile application interface"
             loading="lazy"
+            width="84"
+            height="168"
           />
         </div>
 
@@ -138,9 +144,11 @@ function HowWeWork() {
           <div className="work-stat-text">Completed & delivered projects</div>
           <img
             className="work-stat-phone"
-            src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=200&h=400&fit=crop"
-            alt="Hand holding phone"
+            src="https://images.unsplash.com/photo-1510557880182-3d4d3cba35a5?w=200&h=400&fit=crop&auto=format&q=80"
+            alt="Professional using mobile application"
             loading="lazy"
+            width="84"
+            height="168"
           />
         </div>
 
@@ -152,9 +160,11 @@ function HowWeWork() {
           </div>
           <img
             className="work-stat-phone"
-            src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&h=400&fit=crop"
-            alt="Phone device"
+            src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=200&h=400&fit=crop&auto=format&q=80"
+            alt="Modern smartphone with app interface"
             loading="lazy"
+            width="84"
+            height="168"
           />
         </div>
       </div>
@@ -177,16 +187,16 @@ function HowWeWork() {
             <img
               className="work-contact-avatar"
               src="https://i.pravatar.cc/80?img=5"
-              alt="Michael"
+              alt="Michael Thompson - Success Manager"
             />
             <div>
-              <div className="work-contact-person">Michael</div>
+              <div className="work-contact-person">Michael Thompson</div>
               <div className="work-contact-role">Success Manager</div>
               <a
-                href="mailto:michael@microsoft.com"
+                href="mailto:michael@sgcatechnologies.com"
                 className="work-contact-role"
               >
-                michael@microsoft.com
+                michael@sgcatechnologies.com
               </a>
             </div>
           </div>
@@ -219,10 +229,13 @@ function HowWeWork() {
 }
 
 function Navbar({ setCurrentPage }) {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   const onNav = (e, id) => {
     e.preventDefault();
     const el = document.getElementById(id);
     if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setIsMobileMenuOpen(false);
   };
 
   const handleAboutClick = (e) => {
@@ -230,6 +243,7 @@ function Navbar({ setCurrentPage }) {
     setCurrentPage("about");
     // Scroll to top when navigating to About page
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
   const handleHomeClick = (e) => {
@@ -237,6 +251,7 @@ function Navbar({ setCurrentPage }) {
     setCurrentPage("home");
     // Scroll to top when navigating to Home page
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
 
   return (
@@ -246,8 +261,26 @@ function Navbar({ setCurrentPage }) {
         <div className="logo-container">
           <img src="/logo.svg" alt="SGCA Technologies" className="logo" />
         </div>
+
+        {/* Mobile Menu Button */}
+        <button
+          className="mobile-menu-btn"
+          onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+          aria-label="Toggle mobile menu"
+        >
+          <span className={`hamburger ${isMobileMenuOpen ? "open" : ""}`}>
+            <span></span>
+            <span></span>
+            <span></span>
+          </span>
+        </button>
+
         {/* Center: Nav links */}
-        <div className="nav-center-links">
+        <div
+          className={`nav-center-links ${
+            isMobileMenuOpen ? "mobile-open" : ""
+          }`}
+        >
           <a href="#hero" onClick={handleHomeClick} className="hover:text-text">
             Home
           </a>
@@ -264,6 +297,7 @@ function Navbar({ setCurrentPage }) {
               e.preventDefault();
               setCurrentPage("work");
               window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMobileMenuOpen(false);
             }}
             className="hover:text-text"
           >
@@ -275,6 +309,7 @@ function Navbar({ setCurrentPage }) {
               e.preventDefault();
               setCurrentPage("support");
               window.scrollTo({ top: 0, behavior: "smooth" });
+              setIsMobileMenuOpen(false);
             }}
             className="hover:text-text"
           >
@@ -340,10 +375,30 @@ function Hero() {
             <FadeIn delay={0.15}>
               <div className="testimonial-card">
                 <div className="avatar-stack" aria-hidden>
-                  <img src={`https://i.pravatar.cc/100?img=1`} alt="" />
-                  <img src={`https://i.pravatar.cc/100?img=2`} alt="" />
-                  <img src={`https://i.pravatar.cc/100?img=3`} alt="" />
-                  <img src={`https://i.pravatar.cc/100?img=4`} alt="" />
+                  <img
+                    src={`https://i.pravatar.cc/100?img=1`}
+                    alt="Happy client avatar"
+                    width="44"
+                    height="44"
+                  />
+                  <img
+                    src={`https://i.pravatar.cc/100?img=2`}
+                    alt="Satisfied customer avatar"
+                    width="44"
+                    height="44"
+                  />
+                  <img
+                    src={`https://i.pravatar.cc/100?img=3`}
+                    alt="Client testimonial avatar"
+                    width="44"
+                    height="44"
+                  />
+                  <img
+                    src={`https://i.pravatar.cc/100?img=4`}
+                    alt="Customer review avatar"
+                    width="44"
+                    height="44"
+                  />
                 </div>
                 <div className="rating">
                   <strong>4.9/5</strong>
@@ -433,10 +488,12 @@ function SolutionsThatScale() {
               <div className="software-development-image">
                 <FadeIn delay={0.3}>
                   <img
-                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop"
-                    alt="Code Editor Screenshot"
+                    src="https://images.unsplash.com/photo-1555066931-4365d14bab8c?w=800&h=600&fit=crop&auto=format&q=80"
+                    alt="Modern code editor with clean interface showing software development"
                     className="code-screenshot"
                     loading="lazy"
+                    width="800"
+                    height="600"
                   />
                 </FadeIn>
               </div>
@@ -564,10 +621,12 @@ function Testimonials() {
             <FadeIn delay={0.1}>
               <div className="testimonial-image-container">
                 <img
-                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face"
-                  alt="Client"
+                  src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=300&h=300&fit=crop&crop=face&auto=format&q=80"
+                  alt="Sarah Chen, CTO at TechCorp Solutions"
                   className="testimonial-image"
                   loading="lazy"
+                  width="240"
+                  height="240"
                 />
               </div>
             </FadeIn>
@@ -593,19 +652,20 @@ function Testimonials() {
             </FadeIn>
 
             <FadeIn delay={0.4}>
-              <div className="testimonial-quote">
-                "Korem ipsum dolor sit amet, consectetur adipiscing elit. Nunc
-                vulputate libero et velit interdum, ac aliquet odio mattis.
-                Class aptent taciti sociosqu ad litora torquent per conubia
-                nostra, per inceptos himenaeos. Curabitur tempus urna at turpis
-                condimentum lobortis. Ut commodo efficitur neque."
-              </div>
+              <blockquote className="testimonial-quote">
+                "SGCA Technologies transformed our business with their
+                innovative approach to software development. Their team
+                delivered a robust solution that exceeded our expectations, with
+                exceptional attention to detail and seamless integration. The
+                project was completed on time and within budget, and their
+                ongoing support has been invaluable."
+              </blockquote>
             </FadeIn>
 
             <FadeIn delay={0.5}>
               <div className="testimonial-client-info">
-                <div className="client-name">Jane Doe</div>
-                <div className="client-profession">Profession</div>
+                <div className="client-name">Sarah Chen</div>
+                <div className="client-profession">CTO, TechCorp Solutions</div>
               </div>
             </FadeIn>
           </div>
@@ -1163,7 +1223,8 @@ function SupportPage() {
                 <div key={i} className="support-card">
                   <div className="support-card-title">Getting Started</div>
                   <div className="support-card-text">
-                    Jorem ipsum dolor sit amet, consectetur adipiscing elit.
+                    Get started with our comprehensive development services and
+                    expert guidance.
                   </div>
                 </div>
               ))}
@@ -1213,7 +1274,8 @@ function SupportPage() {
             <div className="support-find-answer">
               <div className="support-find-title">Didn’t Find An Answer</div>
               <div className="support-find-text">
-                Dorem ipsum dolor sit amet, consectetur adipiscing elit.
+                Contact our support team for personalized assistance with your
+                project needs.
               </div>
               <div className="support-avatars">
                 {[
@@ -1234,11 +1296,41 @@ function SupportPage() {
                     <img
                       className="support-avatar-img"
                       src={p.img}
-                      alt="Team"
+                      alt={`${
+                        [
+                          "Alex Rodriguez",
+                          "Maria Garcia",
+                          "David Kim",
+                          "Lisa Wang",
+                        ][i] || "Team Member"
+                      } - ${
+                        [
+                          "Senior Developer",
+                          "UX Designer",
+                          "Project Manager",
+                          "DevOps Engineer",
+                        ][i] || "Team Member"
+                      }`}
                       loading="lazy"
+                      width="72"
+                      height="72"
                     />
-                    <div className="support-avatar-name">NAME</div>
-                    <div className="support-avatar-role">Designation</div>
+                    <div className="support-avatar-name">
+                      {[
+                        "Alex Rodriguez",
+                        "Maria Garcia",
+                        "David Kim",
+                        "Lisa Wang",
+                      ][i] || "Team Member"}
+                    </div>
+                    <div className="support-avatar-role">
+                      {[
+                        "Senior Developer",
+                        "UX Designer",
+                        "Project Manager",
+                        "DevOps Engineer",
+                      ][i] || "Team Member"}
+                    </div>
                   </div>
                 ))}
               </div>
@@ -1348,7 +1440,7 @@ function Footer({ setCurrentPage }) {
 
         {/* Bottom section */}
         <div className="footer-bottom">
-          <div className="footer-bottom-left">support@ssanimations.in</div>
+          <div className="footer-bottom-left">support@sgcatechnologies.com</div>
           <div className="footer-bottom-center">
             Noida One, Sector 62, Noida 201309
           </div>

@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useState } from "react";
 import {
   FaArrowRight,
   FaLinkedin,
@@ -9,6 +9,8 @@ import {
 } from "react-icons/fa";
 
 const About = ({ setCurrentPage }) => {
+  const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
+
   // Scroll to top when component mounts
   useEffect(() => {
     window.scrollTo({ top: 0, behavior: "smooth" });
@@ -18,24 +20,34 @@ const About = ({ setCurrentPage }) => {
     e.preventDefault();
     setCurrentPage("home");
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
   const handleWorkClick = (e) => {
     e.preventDefault();
     setCurrentPage("work");
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
   const handleSupportClick = (e) => {
     e.preventDefault();
     setCurrentPage("support");
     window.scrollTo({ top: 0, behavior: "smooth" });
+    setIsMobileMenuOpen(false);
   };
   const handlePortfolioClick = (e) => {
     e.preventDefault();
     setCurrentPage("home");
+    setIsMobileMenuOpen(false);
     setTimeout(() => {
       const el = document.getElementById("projects");
       if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
     }, 0);
+  };
+  const handleContactClick = (e) => {
+    e.preventDefault();
+    const el = document.getElementById("contact");
+    if (el) el.scrollIntoView({ behavior: "smooth", block: "start" });
+    setIsMobileMenuOpen(false);
   };
   const teamMembers = [
     {
@@ -132,7 +144,23 @@ const About = ({ setCurrentPage }) => {
               className="about-logo-img"
             />
           </div>
-          <nav className="about-nav">
+
+          {/* Mobile Menu Button */}
+          <button
+            className="about-mobile-menu-btn"
+            onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+            aria-label="Toggle mobile menu"
+          >
+            <span
+              className={`about-hamburger ${isMobileMenuOpen ? "open" : ""}`}
+            >
+              <span></span>
+              <span></span>
+              <span></span>
+            </span>
+          </button>
+
+          <nav className={`about-nav ${isMobileMenuOpen ? "mobile-open" : ""}`}>
             <a
               href="#home"
               className="about-nav-link"
@@ -164,7 +192,11 @@ const About = ({ setCurrentPage }) => {
             >
               Portfolio
             </a>
-            <a href="#contact" className="about-nav-link">
+            <a
+              href="#contact"
+              className="about-nav-link"
+              onClick={handleContactClick}
+            >
               Contact
             </a>
           </nav>
@@ -342,7 +374,7 @@ const About = ({ setCurrentPage }) => {
                 <div className="about-contact-item">
                   <FaEnvelope className="about-contact-icon" />
                   <span className="about-contact-text">
-                    support@ssanimations.in
+                    support@sgcatechnologies.com
                   </span>
                   <button className="about-contact-copy">
                     <svg
@@ -477,7 +509,9 @@ const About = ({ setCurrentPage }) => {
 
           {/* Bottom section */}
           <div className="footer-bottom">
-            <div className="footer-bottom-left">support@ssanimations.in</div>
+            <div className="footer-bottom-left">
+              support@sgcatechnologies.com
+            </div>
             <div className="footer-bottom-center">
               Noida One, Sector 62, Noida 201309
             </div>

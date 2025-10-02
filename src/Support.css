@@ -247,6 +247,62 @@
     grid-template-columns: repeat(2, minmax(0, 1fr));
     gap: 16px;
   }
+  .support-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .support-search {
+    width: 100%;
+    flex-direction: column;
+    gap: 12px;
+  }
+  .support-search-input {
+    width: 100%;
+    font-size: 16px;
+  }
+  .support-search-button {
+    width: 100%;
+    font-size: 16px;
+  }
+  .support-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  .support-card {
+    padding: 20px;
+  }
+  .support-card-title {
+    font-size: 16px;
+    line-height: 24px;
+  }
+  .support-card-text {
+    font-size: 14px;
+    line-height: 20px;
+  }
+  .support-heading {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .support-faq-q {
+    font-size: 15px;
+    line-height: 22px;
+  }
+  .support-find-title {
+    font-size: 24px;
+    line-height: 32px;
+  }
+  .support-avatar-img {
+    width: 60px;
+    height: 60px;
+  }
+  .support-avatar-name {
+    font-size: 13px;
+    line-height: 18px;
+  }
+  .support-avatar-role {
+    font-size: 11px;
+    line-height: 16px;
+  }
 }
 
 .support-team-grid {
